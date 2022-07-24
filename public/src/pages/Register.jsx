@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import Logo from '../assets/logo.svg'
 
 
 function Register() {
@@ -10,7 +11,7 @@ function Register() {
   }
 
   const handleChange = (e) => {
-    
+
   }
 
   return (
@@ -18,7 +19,7 @@ function Register() {
       <FormContainer>
         <form onSubmit={ (e)=>handleSubmit(ev) }>
           <div className="brand">
-            <img src="" alt="" />
+            <img src={Logo} alt="logo" />
             <h1>snappy</h1>
           </div>
           <input 
