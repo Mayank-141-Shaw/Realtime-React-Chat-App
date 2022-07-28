@@ -1,9 +1,9 @@
-import logo from './logo.svg';
+
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Register from './components/Register'
-import Login from './components/Login'
-import Chat from './components/Chat'
+import Register from './pages/Register'
+import Login from './pages/Login'
+import Chat from './pages/Chat'
 
 function App() {
   return (
