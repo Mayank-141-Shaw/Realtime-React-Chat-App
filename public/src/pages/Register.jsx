@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import Logo from '../assets/logo.svg'
 import styled from 'styled-components';
 
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 function Register() {
 
   const [values, setValues] = useState({
@@ -14,11 +17,25 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Form ");
+    handleValidation();
   }
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]:e.target.value })
+  }
+
+  const handleValidation = () => {
+    const { password, confirmPassword, username, email } = values;
+    if(password !== confirmPassword){
+      toast.error("password and confirm are not same", 
+        {
+          position: 'bottom-right',
+          autoClose: 8000,
+          pauseOnHover: true,
+          draggable: true,
+          theme: 'dark'
+        })
+    }
   }
 
   return (
@@ -59,6 +76,8 @@ function Register() {
           </span>
         </form>
       </FormContainer>
+
+      <ToastContainer />
     </>
   )
 }
