@@ -1,9 +1,16 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import Logo from '../assets/logo.svg'
 import styled from 'styled-components';
 
 function Register() {
+
+  const [values, setValues] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,7 +18,7 @@ function Register() {
   }
 
   const handleChange = (e) => {
-
+    setValues({ ...values, [e.target.name]:e.target.value })
   }
 
   return (
