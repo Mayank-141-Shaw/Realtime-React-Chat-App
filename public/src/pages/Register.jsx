@@ -2,9 +2,22 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import Logo from '../assets/logo.svg'
 import styled from 'styled-components';
+import axios from 'axios';
 
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+
+
+// toast options
+const toastOptions = {
+  position: 'bottom-right',
+  autoClose: 8000,
+  pauseOnHover: true,
+  draggable: true,
+  theme: 'dark'
+}
+
+
 
 function Register() {
 
@@ -17,25 +30,41 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleValidation();
+    
+    // if true then we call the api
+    if( handleValidation() ){
+      const { password, confirmPassword, username, email } = values;
+      const {data} = await axios.post()
+    }
   }
 
+
+  // handle value changes
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]:e.target.value })
   }
 
+
+  // validation
   const handleValidation = () => {
     const { password, confirmPassword, username, email } = values;
     if(password !== confirmPassword){
-      toast.error("password and confirm are not same", 
-        {
-          position: 'bottom-right',
-          autoClose: 8000,
-          pauseOnHover: true,
-          draggable: true,
-          theme: 'dark'
-        })
+      toast.error("password and confirm are not same", toastOptions );
+      return false;
     }
+    else if(username.length < 3){
+      toast.error("username should be greater than 3 characters", toastOptions );
+      return false;
+    }
+    else if(password.length < 8){
+      toast.error("password should be greater or equal to 8 characters", toastOptions );
+      return false;
+    }
+    else if(email === ""){
+      toast.error("email is required", toastOptions );
+      return false;
+    }
+    return true;
   }
 
   return (
