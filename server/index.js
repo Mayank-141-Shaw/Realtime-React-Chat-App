@@ -1,6 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const mongoose = require("mongoose")
+const userRoutes = require("./routes/userRoutes")
 
 
 const app = express();
@@ -9,6 +10,9 @@ require("dotenv").config();
 // middleware
 app.use(cors());
 app.use(express.json());
+
+// using the controller route for registering
+app.use( "/api/auth", userRoutes );
 
 
 // mongo connect
