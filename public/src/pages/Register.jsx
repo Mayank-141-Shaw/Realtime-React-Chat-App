@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { registerRoute } from '../utils/APIRoutes';
 
 
 // toast options
@@ -34,7 +35,9 @@ function Register() {
     // if true then we call the api
     if( handleValidation() ){
       const { password, confirmPassword, username, email } = values;
-      const {data} = await axios.post()
+      const {data} = await axios.post( registerRoute, {
+        username, email, password, 
+      } )
     }
   }
 
