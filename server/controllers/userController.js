@@ -44,3 +44,35 @@ module.exports.register = ( req, res, next ) => {
     }
 
 };
+
+
+
+// handles the post request for loin
+// whenever user submits login button it is rerouted to this controller
+// this will then get the request and do required tasks
+module.exports.login = ( req, res, next ) => {
+    
+    try{
+        const { username, password } = req.body;
+
+        // check if user is present inn database
+        const user = await User.findOne({ username });
+        if(!user) 
+            return res.json({ msg:"Incorrect username or password", status: false });
+
+        // checking if password matches among given password an pwd from db
+        const isPasswordalid = await bcrypt.compare(password, user.password)
+        if(!isPasswordalid) 
+            return res.json({ msg:"Incorrect username or password", status: false })
+
+        // delete the password returned after check is done
+        delete user.password;
+        
+        // return the response
+        return res.json({ status: true, user });
+        
+    } catch( err ){
+        next(err)
+    }
+
+};
