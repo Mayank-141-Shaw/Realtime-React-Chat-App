@@ -83,6 +83,20 @@ function Register() {
     return true;
   }
 
+
+  // pre render checks for login creds
+  useEffect( () => {
+
+    // if user creds already exists, no need to again create the same user
+    if(localStorage.getItem("chat-app-user")){
+      // then directly navigate to login page
+      // because such user already exists in db
+      navigate('/login')
+    }
+  }, [] )
+
+
+
   return (
     <>
       <FormContainer>
