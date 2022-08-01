@@ -73,6 +73,18 @@ function Login() {
     return true;
   }
 
+
+  // pre render checks for login creds
+  useEffect( () => {
+
+    // if session was recently logged in, i.e, it contains user creds
+    if(localStorage.getItem("chat-app-user")){
+      // then directly navigate to chat home page
+      navigate('/')
+    }
+  }, [] )
+
+
   return (
     <>
       <FormContainer>
