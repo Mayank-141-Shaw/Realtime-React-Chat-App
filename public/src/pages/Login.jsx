@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { registerRoute } from '../utils/APIRoutes';
+import { loginRoute } from '../utils/APIRoutes';
 
 
 // toast options
@@ -26,9 +26,7 @@ function Login() {
 
   const [values, setValues] = useState({
     username: "",
-    email: "",
     password: "",
-    confirmPassword: "",
   })
 
   const handleSubmit = (e) => {
@@ -36,9 +34,9 @@ function Login() {
     
     // if true then we call the api
     if( handleValidation() ){
-      const { password, confirmPassword, username, email } = values;
-      const {data} = await axios.post( registerRoute, {
-        username, email, password, 
+      const { password, username } = values;
+      const {data} = await axios.post( loginRoute, {
+        username, password, 
       } );
 
       if(data.status === false){
@@ -63,21 +61,13 @@ function Login() {
 
   // validation
   const handleValidation = () => {
-    const { password, confirmPassword, username, email } = values;
-    if(password !== confirmPassword){
-      toast.error("password and confirm are not same", toastOptions );
+    const { password, username, email } = values;
+    if(password === ""){
+      toast.error("Username and password is required", toastOptions );
       return false;
     }
-    else if(username.length < 3){
-      toast.error("username should be greater than 3 characters", toastOptions );
-      return false;
-    }
-    else if(password.length < 8){
-      toast.error("password should be greater or equal to 8 characters", toastOptions );
-      return false;
-    }
-    else if(email === ""){
-      toast.error("email is required", toastOptions );
+    else if(username === ""){
+      toast.error("Username and password is required", toastOptions );
       return false;
     }
     return true;
@@ -96,12 +86,7 @@ function Login() {
             placeholder='Username' 
             name='username' 
             onChange={e=>handleChange(e)}
-          />
-          <input 
-            type="email" 
-            placeholder='Email' 
-            name='email' 
-            onChange={e=>handleChange(e)}
+            min={3}
           />
           <input 
             type="password" 
@@ -109,15 +94,9 @@ function Login() {
             name='password' 
             onChange={e=>handleChange(e)}
           />
-          <input 
-            type="password" 
-            placeholder='Confirm Password' 
-            name='confirmPassword' 
-            onChange={e=>handleChange(e)}
-          />
-          <button type='submit'>Create User</button>
+          <button type='submit'>Login User</button>
           <span>
-            Already have an account ? <Link to='/login'>Login</Link>
+            Don't have an account ? <Link to='/register'>Register</Link>
           </span>
         </form>
       </FormContainer>
