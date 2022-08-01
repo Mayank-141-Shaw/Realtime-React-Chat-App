@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.svg'
 import styled from 'styled-components';
 import axios from 'axios';
@@ -22,6 +22,8 @@ const toastOptions = {
 
 function Register() {
 
+  const navigate = useNavigate();
+
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -37,7 +39,18 @@ function Register() {
       const { password, confirmPassword, username, email } = values;
       const {data} = await axios.post( registerRoute, {
         username, email, password, 
-      } )
+      } );
+
+      if(data.status === false){
+        toast.error(data.msg, toastOptions);
+      }
+      if(data.status === true){
+        localStorage.setItem( 'chat-app-user', JSON.stringify(data.user) );
+
+        // if all is fine then it will store user info in local storage
+        // and navigate to the chat page
+        navigate("/")
+      }
     }
   }
 
