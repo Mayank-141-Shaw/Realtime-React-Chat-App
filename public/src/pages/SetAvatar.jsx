@@ -30,7 +30,8 @@ export default function SetAvatar() {
     
     const setProfilePicture = async () => {}
 
-    useEffect( ()=>{
+    // fetching images data from api on refresh
+    useEffect( async ()=>{
         const data = [];
         for(let i=0; i<4; i++){
             // gets a different random image out of 1 - 1000 images id
@@ -53,7 +54,18 @@ export default function SetAvatar() {
 
                 <div className='avatars'>
                     {
-
+                        avatars.map( (avatar, index) => {
+                            return (
+                                <div 
+                                    key={index}
+                                    className={`avatar ${selectedAvatar === index ? "selected" : ""}`}>
+                                    <img 
+                                        src={`data:image/svg+xml;base64,${avatar}`} alt='avatar'
+                                        onClick={ () => setSelectedAvatar(index) }
+                                    />
+                                </div>
+                            )
+                        } )
                     }
                 </div>
             </Container>
