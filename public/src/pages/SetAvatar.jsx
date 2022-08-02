@@ -13,8 +13,24 @@ export default function SetAvatar() {
     const api = "https://api.multiavatar.com/45678945";
     const navigate = useNavigate();
 
+    const [avatars, setAvatars] = useState([]);
+
     return (
-        <div>SetAvatar</div>
+        <>
+            <Container>
+                <div className="title-container">
+                    <h1>Pick an avatar as your profile picture</h1>
+                </div>
+
+                <div className='avatars'>
+                    {
+
+                    }
+                </div>
+            </Container>
+            <ToastContainer />
+        </>
     )
 }
 
+const Container = styled.div``;
