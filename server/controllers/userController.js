@@ -99,3 +99,22 @@ module.exports.setAvatar = ( req, res, next ) => {
         next(e);
     }
 }
+
+
+// handles the get request for getting list of all user
+// from db excluding the current user
+module.exports.getAllUsers = ( req, res, next ) => {
+    try{
+        // query gets all users except current user
+        const users = await User.find({ _id : { $ne : req.params.id } }).select([
+            "email",
+            "username",
+            "avatarImage",
+            "_id",
+        ])
+
+        return res.json(users);
+    }catch(e){
+        next(e);
+    }
+}
