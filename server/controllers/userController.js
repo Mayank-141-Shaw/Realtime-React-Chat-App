@@ -76,3 +76,26 @@ module.exports.login = ( req, res, next ) => {
     }
 
 };
+
+
+// handles the post request for setting avatar
+// whenever user submits avatar button it is rerouted to this controller
+// this will then get the request and do required tasks
+module.exports.setAvatar = ( req, res, next ) => {
+    try{
+        const userId = req.params.id;
+        const avatarImage = req.body.image;
+        const userData = await User.findById(userId, {
+            isAvatarImageSet: true,
+            avatarImage,
+        });
+
+        return res.json({ 
+            isSet: userData.isAvatarImageSet, 
+            image: userData.avatarImage,
+        })
+
+    }catch(e){
+        next(e);
+    }
+}
