@@ -31,6 +31,24 @@ export default function SetAvatar() {
     const setProfilePicture = async () => {
         if(selectedAvatar === undefined){
             toast.error("Please select an avatar", toastOptions);
+        } else {
+            const user = await JSON.parse(localStorage.getItem('chat-app-user'));
+            const {data} = await axios.post(`${setAvatarRoute}/${user._id}`, {
+                image : avatars[selectedAvatar],
+            });
+
+            // if data is present, logged in
+            if(data.isSet) {
+                // set the profile image
+                user.isAvatarImageSet = true;
+                user.avatarImage = data.image;
+
+                // update the cookie info
+                localStorage.setItem("chat-app-user", JSON.stringify(user));
+                
+                // goto the home page
+                navigate('/');
+            }
         }
     }
 
@@ -53,9 +71,11 @@ export default function SetAvatar() {
         <>
         {
             isLoading ? 
-            <Container>
-                <img src={loader} alt="loader" className='loader'/>
-            </Container>
+            (
+                <Container>
+                    <img src={loader} alt="loader" className='loader'/>
+                </Container>
+            )
             :
             (
                 <Container>
