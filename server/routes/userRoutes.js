@@ -1,4 +1,4 @@
-const { register, login } = require("../controllers/userController")
+const { register, login, setAvatar } = require("../controllers/userController")
 
 
 // making a router
@@ -9,6 +9,9 @@ router.post("/register", register)
 
 // adding the controller login route
 router.post("/login", login)
+
+// adding the controller login route
+router.post("/setAvatar/:id", setAvatar)
 
 
 module.exports = router;

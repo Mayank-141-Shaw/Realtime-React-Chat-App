@@ -48,6 +48,9 @@ export default function SetAvatar() {
                 
                 // goto the home page
                 navigate('/');
+            } else {
+                // error
+                toast.error("Error setting avatar. Start again", toastOptions);
             }
         }
     }
