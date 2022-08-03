@@ -1,7 +1,38 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { allUsersRoute } from '../utils/APIRoutes';
 
 function Chat() {
+
+  const navigate = useNavigate();
+
+  const [contacts, setContacts] = useState([])
+  const [curUser, setCurUser] = useState(undefined)
+
+  // to get logged user info
+  useEffect( () => {
+    // if not logged in first login
+    if(!localStorage.getItem('chat-app-user')){
+        navigate("/login");
+    }else{
+      setCurUser(await JSON.parse(localStorage.getItem('chat-app-user')))
+    }
+  })
+
+  // to get list of all contacts
+  useEffect( async () => {
+    if(curUser) {
+      if(curUser.isAvatarImageSet){
+        const data = await axios.get(`${allUsersRoute}/${curUser._id}`);
+        setContacts(data.data);
+      }else{
+        navigate('/setAvatar');
+      }
+    }
+  }, [] )
+
   return (
     <Container>
       <div className="container">
