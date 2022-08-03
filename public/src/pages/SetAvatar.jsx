@@ -68,6 +68,7 @@ export default function SetAvatar() {
                         } )
                     }
                 </div>
+                <button className='submit-btn' onClick={setProfilePicture()}>Set as Profile Picture</button>
             </Container>
             <ToastContainer />
         </>
@@ -100,9 +101,35 @@ const Container = styled.div`
 
         .avatar{
             border: 0.4rem solid transparent;
+            padding: 0.4rem;
+            border-radius: 4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.5s ease-in-out;
             img{
                 height: 6rem;
             }
         }
+
+        .selected{
+            border: 0.4rem solid #4e0eff;
+        }
     }
+
+    .submit-button{
+        background-color: #997af0;
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 0.4rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+        transition: 0.5s ease-in-out;
+        &:hover{
+          background-color: #4e0eff;
+        }
+      }
 `;
