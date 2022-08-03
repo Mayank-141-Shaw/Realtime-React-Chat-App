@@ -27,6 +27,13 @@ export default function SetAvatar() {
         draggable: true,
         theme: 'dark'
     }
+
+    useEffect( () => {
+        // if not logged in first login
+        if(!localStorage.getItem('chat-app-user')){
+            navigate("/login");
+        }
+    } )
     
     const setProfilePicture = async () => {
         if(selectedAvatar === undefined){
