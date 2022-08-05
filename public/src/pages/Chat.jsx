@@ -11,6 +11,11 @@ function Chat() {
 
   const [contacts, setContacts] = useState([])
   const [curUser, setCurUser] = useState(undefined)
+  const [currentChat, setCurrentChat] = useState(undefined)
+
+  const handleChatChange = (chat) => {
+    setCurrentChat(chat);
+  }
 
   // to get logged user info
   useEffect( () => {
@@ -37,7 +42,7 @@ function Chat() {
   return (
     <Container>
       <div className="container">
-        <Contacts contacts={contacts} currentUser={curUser}/>
+        <Contacts contacts={contacts} currentUser={curUser} changeChat={handleChatChange}/>
       </div>
     </Container>
   )
