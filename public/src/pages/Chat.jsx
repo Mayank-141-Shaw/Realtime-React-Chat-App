@@ -43,6 +43,7 @@ function Chat() {
     <Container>
       <div className="container">
         <Contacts contacts={contacts} currentUser={curUser} changeChat={handleChatChange}/>
+        <Welcome currentUser={curUser} />
       </div>
     </Container>
   )
