@@ -28,7 +28,7 @@ function Chat() {
       setCurUser(await JSON.parse(localStorage.getItem('chat-app-user')))
       setIsLoaded(true)
     }
-  })
+  }, [])
 
   // to get list of all contacts
   useEffect( async () => {
