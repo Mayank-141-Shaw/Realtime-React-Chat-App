@@ -4162,6 +4162,11 @@ emittery@^0.8.1:
   resolved "https://registry.yarnpkg.com/emittery/-/emittery-0.8.1.tgz#bb23cc86d03b30aa75a7f734819dee2e1ba70860"
   integrity sha512-uDfvUjVrfGJJhymx/kz6prltenw1u7WrCg1oa94zYY8xxVpLLUu045LAT0dhDZdXG58/EpPL/5kA180fQ/qudg==
 
+emoji-picker-react@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/emoji-picker-react/-/emoji-picker-react-3.6.0.tgz#d371b3ba0bebfa202a58896f31dbc631a66f9b5e"
+  integrity sha512-J5RhEYfxpJQ70dQrLx7E6dKdVOmXI1TXIwTspK/tqwInFDk69a+IvbNJ8X1Xd8MbIA/k+ybreZop7AEncH5jsw==
+
 emoji-regex@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-8.0.0.tgz#e818fd69ce5ccfcb404594f842963bf53164cc37"
