@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ChatInput from './ChatInput';
 import Logout from './Logout';
+import Messages from './Messages';
 
 export default function ChatContainer({ currentChat }) {
 
@@ -31,7 +32,7 @@ export default function ChatContainer({ currentChat }) {
               <Logout />
             </div>
       
-            <div className="chat-messages"></div>
+            <Messages />
       
             <ChatInput handleSendMsg={handleSendMsg} />
           </Container>
