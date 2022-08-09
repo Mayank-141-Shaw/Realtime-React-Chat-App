@@ -5,6 +5,7 @@ import Logout from './Logout';
 import axios from 'axios';
 import Messages from './Messages';
 import { getAllMessageRoute, sendMessageRoute } from '../utils/APIRoutes';
+import { v4 as uuidv4 } from 'uuid'
 
 export default function ChatContainer({ currentChat, currentUser, socket }) {
 
@@ -14,13 +15,14 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
   const scrollRef = useRef()
 
   useEffect( async () => {
-    const response = await axios.post( getAllMessageRoute, {
-      from: currentUser._id,
-      to: currentChat._id,
-    } );
-
-    setMessages(response.data);
-
+    if(currentChat){
+      const response = await axios.post( getAllMessageRoute, {
+        from: currentUser._id,
+        to: currentChat._id,
+      } );
+  
+      setMessages(response.data);
+    }
   }, [currentChat] )
 
   const handleSendMsg = async (msg) => {
@@ -89,7 +91,7 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
               {
                 messages.map( message => {
                   return (
-                    <div>
+                    <div ref={scrollRef} key={uuidv4}>
                       <div className={`message ${message.fromSelf ? "sended":"received"}`}>
                         <div className="content">
                           <p>
@@ -155,6 +157,16 @@ const Container = styled.div`
     flex-direction: column;
     gap: 1rem;
     overflow: auto;
+
+    &::webkit-scrollbar{
+      width: 0.2rem;
+
+      &-thumb{
+        background-color: #ffffff39;
+        width: 0.1rem;
+        border-radius: 1rem;
+      }
+    }
 
     .message{
       display: flex;
