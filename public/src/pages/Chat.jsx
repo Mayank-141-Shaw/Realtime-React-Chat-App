@@ -50,7 +50,7 @@ function Chat() {
           isLoaded && currentChat === undefined ? 
           <Welcome currentUser={curUser} /> 
           :
-          <ChatContainer currentChat={currentChat} />
+          <ChatContainer currentChat={currentChat} currentUser={curUser} />
         }
       </div>
     </Container>
