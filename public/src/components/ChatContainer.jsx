@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import ChatInput from './ChatInput';
 import Logout from './Logout';
@@ -6,9 +6,12 @@ import axios from 'axios';
 import Messages from './Messages';
 import { getAllMessageRoute, sendMessageRoute } from '../utils/APIRoutes';
 
-export default function ChatContainer({ currentChat, currentUser }) {
+export default function ChatContainer({ currentChat, currentUser, socket }) {
 
   const [messages, setMessages] = useState([]);
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+  
+  const scrollRef = useRef()
 
   useEffect( async () => {
     const response = await axios.post( getAllMessageRoute, {
@@ -27,7 +30,38 @@ export default function ChatContainer({ currentChat, currentUser }) {
       message: msg,
     } );
 
-  }
+    socket.current.emit("send-msg", {
+      to: currentChat._id,
+      from: currentUser._id,
+      message: msg,
+    });
+
+    const msgs = [...messages];
+    msgs.push({fromSelf: true, message: msg});
+    setMessages(msgs);
+  };
+
+
+  // on receiving a message from other user
+  useEffect( ()=> {
+    if(socket.current) {
+      socket.current.on("msg-receive", (msg)=>{
+        setArrivalMessage({fromSelf: false, message:msg});
+      })
+    }
+  }, [])
+
+
+  // if we get any message from others we add it to list of messages
+  useEffect( () => {
+    arrivalMessage && setMessages( (prev) => [...prev, arrivalMessage] )
+  }, [arrivalMessage] )
+
+
+  // every time we get a new message we scroll it into view
+  useEffect( ()=>{
+    scrollRef.current?.scrollIntoView({behaviour: "smooth"});
+  }, [messages])
 
   return (
     <>
