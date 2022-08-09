@@ -8,4 +8,4 @@ export const setAvatarRoute = `${ host }/api/auth/setAvatar`
 
 export const allUsersRoute = `${ host }/api/auth/allUsers`
 
-export const setMessageRoute = `${ host }/api/message/addmsg`
+export const sendMessageRoute = `${ host }/api/message/addmsg`
