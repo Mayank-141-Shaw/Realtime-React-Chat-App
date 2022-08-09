@@ -8,6 +8,6 @@ const router = require("express").Router()
 router.post("/addmsg/", addMessage)
 
 // adding the controller get all msg route
-router.get("/getmsg/", getAllMessage)
+router.post("/getmsg/", getAllMessage)
 
 module.exports = router;
