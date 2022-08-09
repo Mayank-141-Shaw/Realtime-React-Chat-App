@@ -2,6 +2,7 @@ const express = require("express")
 const cors = require("cors")
 const mongoose = require("mongoose")
 const userRoutes = require("./routes/userRoutes")
+const msgRoutes = require("./routes/messagesRoutes")
 
 
 const app = express();
@@ -13,7 +14,7 @@ app.use(express.json());
 
 // using the controller route for registering
 app.use( "/api/auth", userRoutes );
-
+app.use( "/api/message", msgRoutes );
 
 // mongo connect
 mongoose.connect(process.env.MONGO_URL, {
