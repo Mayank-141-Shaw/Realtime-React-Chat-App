@@ -9,3 +9,5 @@ export const setAvatarRoute = `${ host }/api/auth/setAvatar`
 export const allUsersRoute = `${ host }/api/auth/allUsers`
 
 export const sendMessageRoute = `${ host }/api/message/addmsg`
+
+export const getAllMessageRoute = `${ host }/api/message/getmsg`
