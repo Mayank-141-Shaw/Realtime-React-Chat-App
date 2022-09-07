@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { allUsersRoute, host } from '../utils/APIRoutes';
 import Contacts from '../components/Contacts';
 import ChatContainer from '../components/ChatContainer';
+import Welcome from '../components/Welcome';
 import { io } from 'socket.io-client'
 
 function Chat() {
@@ -28,7 +29,7 @@ function Chat() {
     if(!localStorage.getItem('chat-app-user')){
         navigate("/login");
     }else{
-      setCurUser(await JSON.parse(localStorage.getItem('chat-app-user')))
+      setCurUser(JSON.parse(localStorage.getItem('chat-app-user')))
       setIsLoaded(true)
     }
   }, [])
@@ -46,7 +47,7 @@ function Chat() {
 
 
   // to get list of all contacts
-  useEffect( async () => {
+  useEffect(async () => {
     if(curUser) {
       if(curUser.isAvatarImageSet){
         const data = await axios.get(`${allUsersRoute}/${curUser._id}`);
