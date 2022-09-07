@@ -31,7 +31,7 @@ function Register() {
     confirmPassword: "",
   })
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     // if true then we call the api
